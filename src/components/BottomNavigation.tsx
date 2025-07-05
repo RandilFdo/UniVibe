@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Home, Users, MessageSquare, User, Heart, Search, BookOpen } from 'lucide-react';
+import { Home, Users, MessageSquare, User, Heart, Search } from 'lucide-react';
 import { useLocation, Link } from 'react-router-dom';
 
 const BottomNavigation = () => {
@@ -9,7 +9,6 @@ const BottomNavigation = () => {
   const navItems = [
     { icon: Home, label: 'Feed', path: '/' },
     { icon: Search, label: 'Explore', path: '/explore' },
-    { icon: BookOpen, label: 'Study', path: '/study-help' },
     { icon: MessageSquare, label: 'Confessions', path: '/confessions' },
     { icon: Heart, label: 'Messages', path: '/matches' },
     { icon: User, label: 'Profile', path: '/profile' },
@@ -28,7 +27,7 @@ const BottomNavigation = () => {
               to={item.path}
               className={`flex flex-col items-center py-2 px-2 rounded-xl transition-all duration-200 hover:scale-105 ${
                 isActive 
-                  ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/30 dark:text-purple-400' 
+                  ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/30 scale-110 animate-pulse' 
                   : 'text-gray-500 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400'
               }`}
             >

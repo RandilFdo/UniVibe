@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import BottomNavigation from '../components/BottomNavigation';
@@ -95,7 +96,7 @@ const Explore = () => {
                 <button
                   key={index}
                   onClick={() => action.tab ? setActiveTab(action.tab) : action.action?.()}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-xl text-center shadow-sm border border-gray-100 dark:border-gray-700 hover:scale-105 transition-transform duration-200"
+                  className="bg-white dark:bg-gray-800 p-4 rounded-xl text-center shadow-sm border border-gray-100 dark:border-gray-700 hover:scale-105 transition-transform duration-200 animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className={`${action.color} w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2`}>
@@ -110,13 +111,13 @@ const Explore = () => {
 
         {/* Tabs */}
         <div className="flex space-x-1 mb-6 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
-          {['trending', 'universities', 'societies', 'events'].map((tab) => (
+          {['trending', 'universities', 'study', 'societies', 'events'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all duration-200 ${
                 activeTab === tab
-                  ? 'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-sm'
+                  ? 'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-sm transform scale-105'
                   : 'text-gray-600 dark:text-gray-400 hover:text-purple-500'
               }`}
             >
@@ -135,7 +136,7 @@ const Explore = () => {
             {trendingPosts.map((post, index) => (
               <div 
                 key={post.id} 
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:scale-105 transition-transform duration-200"
+                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:scale-105 transition-transform duration-200 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <img src={post.image} alt="Trending" className="w-full h-32 object-cover" />
@@ -148,19 +149,46 @@ const Explore = () => {
           </div>
         )}
 
-        {activeTab === 'societies' && (
+        {activeTab === 'study' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Recommended Societies</h3>
-              <button 
-                onClick={() => console.log('Create society')}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-2 rounded-lg"
-              >
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Study Help</h3>
+              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-2 rounded-lg">
                 <Plus size={16} />
               </button>
             </div>
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <button className="bg-white dark:bg-gray-800 p-3 rounded-xl border border-gray-100 dark:border-gray-700 text-center hover:scale-105 transition-transform">
+                <BookOpen className="mx-auto mb-2 text-green-500" size={24} />
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Study Notes</p>
+              </button>
+              <button className="bg-white dark:bg-gray-800 p-3 rounded-xl border border-gray-100 dark:border-gray-700 text-center hover:scale-105 transition-transform">
+                <Users className="mx-auto mb-2 text-blue-500" size={24} />
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Q&A Help</p>
+              </button>
+            </div>
+            {studyResources.map((resource, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 animate-fade-in">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">{resource.title}</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{resource.subject}</p>
+                    <p className="text-xs text-gray-400">by {resource.user}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-green-600">{resource.price}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'societies' && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Recommended Societies</h3>
             {societies.map((society, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex items-center space-x-3">
+              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex items-center space-x-3 animate-fade-in">
                 <img src={society.image} alt={society.name} className="w-12 h-12 rounded-full object-cover" />
                 <div className="flex-1">
                   <h4 className="font-semibold text-gray-900 dark:text-white">{society.name}</h4>
@@ -178,15 +206,12 @@ const Explore = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">Campus Events</h3>
-              <button 
-                onClick={() => console.log('Create event')}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-2 rounded-lg"
-              >
+              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-2 rounded-lg">
                 <Plus size={16} />
               </button>
             </div>
             {events.map((event, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 animate-fade-in">
                 <div className="flex items-center space-x-3 mb-3">
                   <Calendar className="text-purple-500" size={20} />
                   <div>
@@ -209,7 +234,7 @@ const Explore = () => {
           <div className="space-y-3">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Popular Universities</h3>
             {universities.map((uni, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex items-center space-x-3">
+              <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex items-center space-x-3 animate-fade-in">
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
                   <span className="text-white font-bold text-sm">{uni.charAt(0)}</span>
                 </div>

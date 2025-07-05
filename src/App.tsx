@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -14,7 +15,6 @@ import Confessions from "./pages/Confessions";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-import StudyHelp from "./pages/StudyHelp";
 
 const queryClient = new QueryClient();
 
@@ -56,7 +56,6 @@ const AppContent = () => {
         <Route path="/confessions" element={<Confessions />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/study-help" element={<StudyHelp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
