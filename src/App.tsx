@@ -11,7 +11,6 @@ import LoadingScreen from './components/LoadingScreen';
 import AuthScreen from './components/AuthScreen';
 import Feed from "./pages/Feed";
 import Explore from "./pages/Explore";
-import Roommates from "./pages/Roommates";
 import Confessions from "./pages/Confessions";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile";
@@ -54,7 +53,6 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Feed />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/roommates" element={<Roommates />} />
         <Route path="/confessions" element={<Confessions />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/profile" element={<Profile />} />

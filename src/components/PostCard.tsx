@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Share, MoreHorizontal, Bookmark, Send } from 'lucide-react';
 import CommentModal from './CommentModal';
+import { useToast } from '../hooks/use-toast';
 
 interface PostCardProps {
   id?: string;
@@ -37,26 +38,38 @@ const PostCard = ({
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
   const [shareCount, setShareCount] = useState(shares);
   const [showComments, setShowComments] = useState(false);
+  const { toast } = useToast();
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     setLikeCount(prev => isLiked ? prev - 1 : prev + 1);
   };
 
-  const handleShare = () => {
-    setShareCount(prev => prev + 1);
-    navigator.share?.({
-      title: `${username}'s post`,
-      text: content,
-      url: window.location.href
-    }).catch(() => {
-      navigator.clipboard.writeText(window.location.href);
-    });
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: `${username}'s post`,
+          text: content,
+          url: window.location.href
+        });
+      } else {
+        await navigator.clipboard.writeText(`${content}\n\n- ${username} from ${university}`);
+        toast({
+          title: "Post copied!",
+          description: "The post has been copied to your clipboard.",
+        });
+      }
+      setShareCount(prev => prev + 1);
+    } catch (error) {
+      // User cancelled share or clipboard failed
+      console.log('Share cancelled or failed');
+    }
   };
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-4 overflow-hidden relative">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-4 overflow-hidden relative animate-fade-in hover:shadow-lg transition-all duration-300">
         {isTrending && (
           <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-2 py-1 rounded-full text-xs font-bold z-10 animate-pulse">
             🔥 TRENDING
@@ -111,7 +124,7 @@ const PostCard = ({
           <div className="flex items-center space-x-6">
             <button 
               onClick={handleLike}
-              className={`flex items-center space-x-2 transition-all duration-200 ${
+              className={`flex items-center space-x-2 transition-all duration-200 hover:scale-110 ${
                 isLiked ? 'text-red-500 scale-110' : 'text-gray-600 dark:text-gray-400 hover:text-red-500'
               }`}
             >
@@ -123,14 +136,14 @@ const PostCard = ({
             </button>
             <button 
               onClick={() => setShowComments(true)}
-              className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors hover:scale-110 duration-200"
             >
               <MessageCircle size={20} />
               <span className="text-sm font-medium">{comments}</span>
             </button>
             <button 
               onClick={handleShare}
-              className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-500 transition-colors"
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-green-500 transition-colors hover:scale-110 duration-200"
             >
               <Share size={20} />
               {shareCount > 0 && <span className="text-sm font-medium">{shareCount}</span>}
@@ -138,7 +151,7 @@ const PostCard = ({
           </div>
           <button
             onClick={() => setIsBookmarked(!isBookmarked)}
-            className={`transition-colors ${
+            className={`transition-colors hover:scale-110 duration-200 ${
               isBookmarked ? 'text-purple-500' : 'text-gray-600 dark:text-gray-400 hover:text-purple-500'
             }`}
           >

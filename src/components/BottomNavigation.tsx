@@ -9,7 +9,6 @@ const BottomNavigation = () => {
   const navItems = [
     { icon: Home, label: 'Feed', path: '/' },
     { icon: Search, label: 'Explore', path: '/explore' },
-    { icon: Users, label: 'Roommates', path: '/roommates' },
     { icon: MessageSquare, label: 'Confessions', path: '/confessions' },
     { icon: Heart, label: 'Messages', path: '/matches' },
     { icon: User, label: 'Profile', path: '/profile' },
@@ -26,9 +25,9 @@ const BottomNavigation = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center py-2 px-2 rounded-xl transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-2 rounded-xl transition-all duration-200 hover:scale-105 ${
                 isActive 
-                  ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/30 scale-110' 
+                  ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/30 scale-110 animate-pulse' 
                   : 'text-gray-500 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400'
               }`}
             >
