@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import PostCard from '../components/PostCard';
@@ -33,7 +32,8 @@ const Feed = () => {
       likes: 67,
       comments: 12,
       shares: 2,
-      isLiked: true
+      isLiked: true,
+      isTrending: false
     },
     {
       id: '3',
@@ -88,7 +88,8 @@ const Feed = () => {
       likes: 0,
       comments: 0,
       shares: 0,
-      isLiked: false
+      isLiked: false,
+      isTrending: false
     };
     setPosts([newPost, ...posts]);
   };

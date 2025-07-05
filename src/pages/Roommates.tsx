@@ -37,12 +37,12 @@ const Roommates = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Header title="Find Roommates" />
       
       <div className="px-4 py-6 pb-24 max-w-md mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900">Available Roommates</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Available Roommates</h2>
           <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-xl shadow-lg hover:opacity-90 transition-opacity">
             <Plus size={20} />
           </button>

@@ -10,6 +10,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoadingScreen from './components/LoadingScreen';
 import AuthScreen from './components/AuthScreen';
 import Feed from "./pages/Feed";
+import Explore from "./pages/Explore";
 import Roommates from "./pages/Roommates";
 import Confessions from "./pages/Confessions";
 import Matches from "./pages/Matches";
@@ -52,6 +53,7 @@ const AppContent = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Feed />} />
+        <Route path="/explore" element={<Explore />} />
         <Route path="/roommates" element={<Roommates />} />
         <Route path="/confessions" element={<Confessions />} />
         <Route path="/matches" element={<Matches />} />

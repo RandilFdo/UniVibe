@@ -46,19 +46,19 @@ const Confessions = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <Header title="Confessions" showSearch={false} />
       
       <div className="px-4 py-6 pb-24 max-w-md mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900">Anonymous Confessions</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Anonymous Confessions</h2>
           <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-xl shadow-lg hover:opacity-90 transition-opacity">
             <Plus size={20} />
           </button>
         </div>
         
-        <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 mb-6">
-          <p className="text-purple-800 text-sm">
+        <div className="bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl p-4 mb-6">
+          <p className="text-purple-800 dark:text-purple-200 text-sm">
             🤫 Share your thoughts anonymously. Your identity is completely private.
           </p>
         </div>
